@@ -1,7 +1,7 @@
 def consolidate_cart(cart)
   new_hash = {}
-  cart.each do |item|
-    if new_hash[item.keys[0]]
+  cart.each do |item| #'item' is the food 
+    if new_hash[item.keys[0]] #key = k,v pair 
       new_hash[item.keys[0]][:count] += 1
     else
       new_hash[item.keys[0]] = {
