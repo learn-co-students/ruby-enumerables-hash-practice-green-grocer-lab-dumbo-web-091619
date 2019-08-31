@@ -16,7 +16,7 @@ def apply_coupons(cart, coupons)
   x=0
     cartcheck.each do |check|
       while x<coupons.length do
-        if check == coupons[x][:item]
+        if check == coupons[x][:item] && cart[check][:count]>=coupons[x][:num]
          if cart["#{check} W/COUPON"]
           cart["#{check} W/COUPON"][:count] += coupons[x][:num]
           cart[check][:count] -=  coupons[x][:num]
@@ -35,11 +35,30 @@ def apply_coupons(cart, coupons)
 end
 
 def apply_clearance(cart)
-  
+  check2 = cart.keys
+    check2.each do |check|
+      if cart[check][:clearance] == true
+        cart[check][:price] = cart[check][:price]-(cart[check][:price]/100)*20
+      end
+    end
+  cart
 end
 
 def checkout(cart, coupons)
-  # code here
+  total=0
+  consolidated_cart = consolidate_cart(cart)
+  coupons_applied = apply_coupons(consolidated_cart, coupons)
+  fully_new_cart = apply_clearance(coupons_applied)
+  keyss = fully_new_cart.keys
+  keyss.each do |som|
+    total += fully_new_cart[som][:price]*fully_new_cart[som][:count]
+  end
+  if total > 100
+  total = total-(total/100)*10
+  total
+else 
+  total
+end
 end
 
 
