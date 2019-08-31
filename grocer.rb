@@ -15,23 +15,58 @@ def apply_coupons(cart, coupons)
   cartcheck = cart.keys
   x=0
     cartcheck.each do |check|
-      while x<coupons.length
+      while x<coupons.length do
         if check == coupons[x][:item]
+         if cart["#{check} W/COUPON"]
+          cart["#{check} W/COUPON"][:count] += coupons[x][:num]
+          cart[check][:count] -=  coupons[x][:num]
+         else
           cart["#{check} W/COUPON"] = {:price => coupons[x][:cost]/coupons[x][:num],  :clearance =>
             cart[check][:clearance], :count => coupons[x][:num]
           }
           cart[check][:count] = cart[check][:count] - coupons[x][:num]
+         end  
         end
         x+=1
-      end  
+      end
+     x=0
     end
-    cart
+  cart
 end
 
 def apply_clearance(cart)
-  # code here
+  
 end
 
 def checkout(cart, coupons)
   # code here
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
