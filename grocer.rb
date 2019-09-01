@@ -62,7 +62,6 @@ def checkout(cart, coupons)
   if total > 100
     puts total
     total = total - (total * 0.1 )
-    #total.round(2)
   end
   total
 end
