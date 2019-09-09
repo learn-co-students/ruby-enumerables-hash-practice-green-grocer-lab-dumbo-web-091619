@@ -115,6 +115,14 @@ describe "Grocer" do
         3.times { cart << avocado }
         consolidated_cart = consolidate_cart(cart)
         coupons = [find_coupon("AVOCADO"), find_coupon("CHEESE")]
+def apply_clearance(cart:[])
+  # code here	  cart.each do |item_name, item_data|
+    if item_data[:clearance]
+      item_data[:price] = (item_data[:price] * 0.8).round(1)
+    end
+  end
+end	
+
 
         multiple_coupons = apply_coupons(consolidated_cart, coupons)
 
